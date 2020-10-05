@@ -340,7 +340,7 @@ class KernelManager(ConnectionFileMixin):
         else:
             # OK, we've waited long enough.
             if self.has_kernel:
-                self.log.debug("Kernel is taking too long to finish, killing")
+                self.log.debug("Kernel is taking too long to finish, killing sync")
                 self._kill_kernel()
 
     def cleanup_resources(self, restart=False):
@@ -584,7 +584,7 @@ class AsyncKernelManager(KernelManager):
         try:
             await asyncio.wait_for(self._async_wait(pollinterval=pollinterval), timeout=waittime)
         except asyncio.TimeoutError:
-            self.log.debug("Kernel is taking too long to finish, killing")
+            self.log.debug("Kernel is taking too long to finish, killing async")
             await self._kill_kernel()
         else:
             # Process is no longer alive, wait and clear
