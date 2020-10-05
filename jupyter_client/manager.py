@@ -466,8 +466,10 @@ class KernelManager(ConnectionFileMixin):
             # TerminateProcess() on Win32).
             try:
                 if hasattr(signal, 'SIGKILL'):
+                    self.log.debug("Sending SIGKILL")
                     self.signal_kernel(signal.SIGKILL)
                 else:
+                    self.log.debug("Doing something else")
                     self.kernel.kill()
             except OSError as e:
                 # In Windows, we will get an Access Denied error if the process
@@ -478,6 +480,7 @@ class KernelManager(ConnectionFileMixin):
                 # On Unix, we may get an ESRCH error if the process has already
                 # terminated. Ignore it.
                 else:
+                    self.log.debug("Got something else")
                     from errno import ESRCH
                     if e.errno != ESRCH:
                         raise
