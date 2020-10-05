@@ -67,7 +67,7 @@ class KernelManager(ConnectionFileMixin):
         self._kernel_spec = None
 
     shutdown_wait_time = Float(
-        5.0, config=True,
+        50.0, config=True,
         help="Time to wait for a kernel to terminate before killing it, "
              "in seconds.")
 
