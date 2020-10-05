@@ -328,7 +328,7 @@ class KernelManager(ConnectionFileMixin):
         """
         if waittime is None:
             waittime = max(self.shutdown_wait_time, 0)
-        self.log.debug("kernel is: "+str(self.kernel))
+        self.log.debug("kernel is: "+str(self.kernel.pid))
         for i in range(int(waittime/pollinterval)):
             if self.is_alive():
                 time.sleep(pollinterval)
